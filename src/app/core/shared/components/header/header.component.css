@@ -1,0 +1,35 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+  width: 100%; /* Asegura que ocupe todo el ancho */
+  position: absolute; /* Fija el título en la parte superior */
+  top: 0; /* Posición en la parte superior */
+  left: 0; /* Asegura alineación izquierda */
+  background: transparent; /* Fondo transparente o personalizado */
+  animation: fadeIn 1s ease-in-out; /* Aplica la animación */
+}
+
+h1 {
+  font-family: 'Poppins', sans-serif; /* Tipografía moderna */
+  font-size: 48px; /* Tamaño grande para destacar */
+  font-weight: bold; /* Estilo llamativo */
+  color: #FFFFFF; /* Blanco para contraste con el fondo */
+  text-align: center; /* Centrado horizontalmente */
+  margin: 0; /* Elimina todos los márgenes */
+  padding: 20px 0; /* Espaciado interno */
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); /* Sombra para mayor visibilidad */
+}
+
+body, html {
+  margin: 0; /* Elimina márgenes del documento */
+  padding: 0; /* Elimina el relleno del documento */
+}

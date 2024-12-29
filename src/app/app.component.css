@@ -1,0 +1,52 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #B83280 10%, #6C2141 100%);
+  background-size: cover; /* Ensure the background covers the entire area */
+  padding: 0 10px; /* Reduce horizontal padding */
+  gap: 1rem;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .main {
+    flex-direction: column;
+    height: auto; /* Adjust height for better fit */
+    padding: 20px; /* Add padding for better spacing */
+  }
+
+  .container {
+    width: 100%; /* Ensure containers take full width */
+    margin-bottom: 20px; /* Add margin between containers */
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  input[type=number] {
+    margin-bottom: 10px;
+  }
+}

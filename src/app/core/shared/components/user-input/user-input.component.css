@@ -1,0 +1,101 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.user-input-form {
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo claro con transparencia */
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  padding: 20px;
+
+  width: 350px; /* Tamaño adecuado para un panel compacto */
+  text-align: center;
+  font-family: 'Poppins', sans-serif; /* Fuente moderna */
+}
+
+.user-input-form h2 {
+  font-size: 18px; /* Tamaño de texto para los párrafos */
+  font-weight: bold;
+  color: #6C2141; /* Tono del gradiente para continuidad visual */
+  margin-bottom: 15px;
+}
+
+.user-input-form label {
+  display: block;
+  font-size: 14px;
+  color: #333; /* Texto oscuro para contraste */
+  margin-bottom: 5px;
+}
+
+.user-input-form input[type="text"],
+.user-input-form input[type="email"],
+.user-input-form input[type="tel"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  font-size: 14px;
+}
+
+.user-input-form button {
+  background-color: #B83280; /* Tono principal del gradiente */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.user-input-form button:hover {
+  background-color: #6C2141; /* Tono complementario del gradiente */
+}
+
+@media (max-width: 600px) {
+  .user-input-form {
+    width: 90%; /* Asegura que el panel sea responsivo */
+    padding: 15px;
+  }
+
+  .user-input-form h2 {
+    font-size: 16px;
+  }
+
+  .user-input-form input[type="text"],
+  .user-input-form input[type="email"],
+  .user-input-form input[type="tel"] {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 28px; /* Ajuste para pantallas pequeñas */
+    }
+  }
+  .user-input-form button {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+}
