@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -13,89 +15,201 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-.container {
+.shipping-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #B83280 10%, #6C2141 100%);
   display: flex;
-  justify-content: center;
+  padding: 2rem;
+  gap: 2rem;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.steps-container {
+  flex: 0 0 300px;
+  padding: 2rem;
+}
+
+.step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.step-item {
+  display: flex;
   align-items: center;
-  height: 100vh;
+  gap: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
 }
 
-.user-input-form {
-  background-color: rgba(255, 255, 255, 0.9); /* Fondo claro con transparencia */
-  border-radius: 12px; /* Bordes redondeados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-  padding: 20px;
-
-  width: 350px; /* Tamaño adecuado para un panel compacto */
-  text-align: center;
-  font-family: 'Poppins', sans-serif; /* Fuente moderna */
+.step-item.active {
+  color: white;
+  font-weight: 600;
 }
 
-.user-input-form h2 {
-  font-size: 18px; /* Tamaño de texto para los párrafos */
-  font-weight: bold;
-  color: #6C2141; /* Tono del gradiente para continuidad visual */
-  margin-bottom: 15px;
+.step-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  transition: all 0.3s ease;
 }
 
-.user-input-form label {
+.step-item.active .step-circle {
+  background-color: white;
+  border-color: white;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.form-container {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-in-out;
+}
+
+h2 {
+  color: #6C2141;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.shipping-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.form-group {
+  flex: 1;
+  position: relative;
+}
+
+label {
   display: block;
-  font-size: 14px;
-  color: #333; /* Texto oscuro para contraste */
-  margin-bottom: 5px;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 
-.user-input-form input[type="text"],
-.user-input-form input[type="email"],
-.user-input-form input[type="tel"] {
+.required {
+  color: #E53E3E;
+}
+
+input {
   width: 100%;
   padding: 10px;
-  margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 8px;
+  font-size: 0.95rem;
+  color: #2D3748;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-  font-size: 14px;
+  transition: all 0.3s ease;
 }
 
-.user-input-form button {
-  background-color: #B83280; /* Tono principal del gradiente */
+input:focus {
+  outline: none;
+  border-color: #B83280;
+  box-shadow: 0 0 0 3px rgba(184, 50, 128, 0.2);
+}
+
+input.error {
+  border-color: #E53E3E;
+  background-color: rgba(229, 62, 62, 0.05);
+}
+
+input.error:focus {
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.2);
+}
+
+.error-message {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  font-size: 0.75rem;
+  color: #E53E3E;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.button-container {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.continue-button {
+  background-color: #B83280;
   color: white;
-  padding: 10px 15px;
+  padding: 10px 20px;
   border: none;
   border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-.user-input-form button:hover {
-  background-color: #6C2141; /* Tono complementario del gradiente */
+.continue-button:hover {
+  background-color: #6C2141;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-@media (max-width: 600px) {
-  .user-input-form {
-    width: 90%; /* Asegura que el panel sea responsivo */
-    padding: 15px;
+.continue-button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .shipping-container {
+    flex-direction: column;
+    padding: 1rem;
   }
 
-  .user-input-form h2 {
+  .steps-container {
+    flex: none;
+    padding: 1rem;
+  }
+
+  .form-container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 1.5rem;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .error-message {
+    bottom: -18px;
+  }
+
+  input {
     font-size: 16px;
-  }
-
-  .user-input-form input[type="text"],
-  .user-input-form input[type="email"],
-  .user-input-form input[type="tel"] {
-    font-size: 14px;
-    padding: 8px;
-  }
-
-  @media (max-width: 600px) {
-    h1 {
-      font-size: 28px; /* Ajuste para pantallas pequeñas */
-    }
-  }
-  .user-input-form button {
-    font-size: 14px;
     padding: 8px 10px;
+  }
+
+  .continue-button {
+    width: 100%;
+    font-size: 14px;
+    padding: 12px;
   }
 }

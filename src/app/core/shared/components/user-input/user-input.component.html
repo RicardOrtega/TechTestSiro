@@ -1,20 +1,90 @@
+<div class="shipping-container">
+  <div class="steps-container">
+    <div class="step-list">
+      <div *ngFor="let step of steps" class="step-item" [class.active]="step.active">
+        <div class="step-circle"></div>
+        <span class="step-text">{{ step.title }}</span>
+      </div>
+    </div>
+  </div>
 
-<div class="container">
-  <div class="user-input-form">
-    <h2>Ingrese sus datos</h2>
-    <form #userDataForm="ngForm">
-      <div>
-        <label for="name">Nombre:</label>
-        <input type="text" id="name" name="name" [(ngModel)]="userData.name" (ngModelChange)="onInputChange()" required>
+  <div class="form-container" *ngIf="currentStep === 1">
+    <h2>¿A quién quieres enviar?</h2>
+    <p class="subtitle">Ingresa los datos de la persona a quien quieres enviar.</p>
+
+    <form [formGroup]="shippingForm" class="shipping-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="rut">RUT <span class="required">*</span></label>
+          <input
+            id="rut"
+            type="text"
+            formControlName="rut"
+            placeholder="12.875.729-5"
+            [class.error]="isFieldInvalid('rut')">
+          <span class="error-message" *ngIf="isFieldInvalid('rut')">
+            {{ getErrorMessage('rut') }}
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="nombre">Nombre <span class="required">*</span></label>
+          <input
+            id="nombre"
+            type="text"
+            formControlName="nombre"
+            placeholder="Vanessa"
+            [class.error]="isFieldInvalid('nombre')">
+          <span class="error-message" *ngIf="isFieldInvalid('nombre')">
+            {{ getErrorMessage('nombre') }}
+          </span>
+        </div>
       </div>
-      <div>
-        <label for="email">Correo Electrónico:</label>
-        <input type="email" id="email" name="email" [(ngModel)]="userData.email" (ngModelChange)="onInputChange()" required>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="apellido">Apellido <span class="required">*</span></label>
+          <input
+            id="apellido"
+            type="text"
+            formControlName="apellido"
+            placeholder="Menares"
+            [class.error]="isFieldInvalid('apellido')">
+          <span class="error-message" *ngIf="isFieldInvalid('apellido')">
+            {{ getErrorMessage('apellido') }}
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="email">Email <span class="required">*</span></label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="ricardo.dao.ort@gmail.com"
+            [class.error]="isFieldInvalid('email')">
+          <span class="error-message" *ngIf="isFieldInvalid('email')">
+            {{ getErrorMessage('email') }}
+          </span>
+        </div>
       </div>
-      <div>
-        <label for="phone">Teléfono:</label>
-        <input type="tel" id="phone" name="phone" [(ngModel)]="userData.phone" (ngModelChange)="onInputChange()" required>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="telefono">Teléfono <span class="required">*</span></label>
+          <input
+            id="telefono"
+            type="tel"
+            formControlName="telefono"
+            placeholder="945967135"
+            [class.error]="isFieldInvalid('telefono')">
+          <span class="error-message" *ngIf="isFieldInvalid('telefono')">
+            {{ getErrorMessage('telefono') }}
+          </span>
+        </div>
       </div>
     </form>
+
+    <div class="button-container">
+      <button class="continue-button" (click)="continuar()">Continuar</button>
+    </div>
   </div>
 </div>
