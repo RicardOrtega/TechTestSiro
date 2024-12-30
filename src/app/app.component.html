@@ -31,10 +31,15 @@
 
   <app-shipping-details
     *ngIf="currentStep === ShippingStep.Details"
-    [shippingData]="shippingData"
+    [shippingData]="shippingData!"
     (orderConfirmed)="onOrderConfirmed()">
   </app-shipping-details>
 
+  <app-alert-modal
+    [show]="showAlertModal"
+    [message]="alertMessage"
+    (close)="closeAlert()">
+  </app-alert-modal>
 
 </main>
 

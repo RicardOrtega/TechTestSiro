@@ -109,7 +109,7 @@ export class PackageSelectionComponent {
   onPackageSelect(pkg: PackageSize) {
     this.isCustomSizeSelected = false;
     if (pkg.volumeCm3 > 200000) {
-      alert('El volumen no puede superar los 2m³ (200,000 cm³).');
+      alert('El volumen no puede superar los 2m³ (200,000 cm³), por favor solicitar asistencia de un encargado.');
       return;
     }
     this.selectedPackage = pkg;

@@ -5,7 +5,8 @@ import {UserInputComponent} from './core/shared/components/user-input/user-input
 import {MapSelectionComponent} from './core/shared/components/map-selection/map-selection.component';
 import {PackageSelectionComponent} from './core/shared/components/package/package.component';
 import {LocationData, ShippingFormData} from './core/shared/interface/data';
-import {ShippingDetailsComponent} from './core/shared/components/shiping-details/shiping-details.component';
+import { ShippingDetailsComponent } from './core/shared/components/shipping-details/shipping-details.component';
+import {AlertModalComponent} from './core/shared/components/alert-modal/alert-modal.component';
 
 export enum ShippingStep {
   Sender,
@@ -28,6 +29,7 @@ export enum ShippingStep {
     MapSelectionComponent,
     PackageSelectionComponent,
     ShippingDetailsComponent,
+    AlertModalComponent,
 
   ], styleUrls: ['./app.component.css'],
 })
@@ -39,50 +41,104 @@ export class AppComponent {
   originLocation?: LocationData;
   destinationLocation?: LocationData;
   shippingData?: ShippingFormData;
+  showAlertModal = false;
+  alertMessage = '';
 
   onSenderComplete(data: any) {
-    console.log('User recepetor :', data);
-    this.senderData = data;
+
+    // Inicializar shippingData si no existe
+    if (!this.shippingData) {
+      this.shippingData = {
+        sender: data,
+        recipient: {
+          rut: '',
+          nombre: '',
+          apellido: '',
+          email: '',
+          telefono: ''
+        },
+        origin: {
+          displayAddress: '',
+          coordinates: { lat: 0, lng: 0 }
+        },
+        destination: {
+          displayAddress: '',
+          coordinates: { lat: 0, lng: 0 }
+        },
+        package: {
+          isCustom: false,
+          selectedPackage: null,
+          calculatedValue: 0
+        },
+        status: 'draft'
+      };
+    } else {
+      this.shippingData.sender = data;
+    }
     this.currentStep = ShippingStep.UserInput;
   }
 
-  onUserInputComplete(data: any) {
-    console.log('User input data received:', data);
-
-    this.senderData = { ...this.senderData, ...data };
-    this.currentStep = ShippingStep.Package;
+  showAlert(message: string) {
+    this.alertMessage = message;
+    this.showAlertModal = true;
   }
 
-  onOriginSelected(location: LocationData) {
-    this.originLocation = location;
-    this.currentStep = ShippingStep.DestinationMap;
+  closeAlert() {
+    this.showAlertModal = false;
+  }
+
+  onUserInputComplete(data: any) {
+    console.log('User recipient data:', data);
+    if (this.shippingData) {
+      this.shippingData.recipient = data;
+    }
+    this.currentStep = ShippingStep.Package;
   }
 
   onPackageComplete(packageData: any) {
     console.log('Package data received:', packageData);
-    this.shippingData = {
-      ...this.shippingData,
-      package: packageData,
-      sender: this.senderData, // Asegurarse de que senderData esté completo
-      status: 'draft'
-    } as ShippingFormData;
-
+    if (this.shippingData) {
+      this.shippingData.package = packageData;
+    }
     this.currentStep = ShippingStep.OriginMap;
   }
 
+  onOriginSelected(location: LocationData) {
+    if (this.shippingData) {
+      this.shippingData.origin = location;
+    }
+    this.originLocation = location;
+    this.currentStep = ShippingStep.DestinationMap;
+  }
+
   onDestinationSelected(location: LocationData) {
-    this.destinationLocation = location;
-    this.shippingData = {
-      sender: this.senderData,
-      origin: this.originLocation!,
-      destination: location,
-    } as unknown as ShippingFormData;
-    this.currentStep = ShippingStep.Package;
+    if (this.shippingData) {
+      this.shippingData.destination = location;
+      // Asegurarse de que todos los datos necesarios estén presentes
+      this.shippingData = {
+        ...this.shippingData,
+        origin: this.originLocation || this.shippingData.origin,
+        status: 'draft'
+      };
+    }
+    this.currentStep = ShippingStep.Details;
   }
 
   onOrderConfirmed() {
+    if (this.shippingData) {
+      this.shippingData.status = 'completed';
+      console.log('Orden confirmada:', this.shippingData);
+    }
     alert('Orden confirmada');
+    this.resetData();
     this.currentStep = ShippingStep.Sender;
+  }
+
+  private resetData() {
+    this.shippingData = undefined;
+    this.senderData = undefined;
+    this.originLocation = undefined;
+    this.destinationLocation = undefined;
   }
 
 
