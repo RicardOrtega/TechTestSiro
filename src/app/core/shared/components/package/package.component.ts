@@ -93,7 +93,7 @@ export class PackageSelectionComponent {
       height: ['', [Validators.min(1), Validators.max(1000)]]
     });
 
-    // Subscribe to form changes
+
     this.packageForm.valueChanges.subscribe(() => {
       if (this.isCustomSizeSelected) {
         this.onDimensionChange();
@@ -173,7 +173,7 @@ export class PackageSelectionComponent {
       };
 
       console.log('Continuing with:', packageData);
-      this.continueClicked.emit(packageData); // Emitir el evento con los datos
+      this.continueClicked.emit(packageData);
     }
   }
 }

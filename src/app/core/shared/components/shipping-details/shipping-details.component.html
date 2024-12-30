@@ -1,10 +1,10 @@
 <div class="shipping-container" *ngIf="shippingData">
-  <!-- ... steps container ... -->
+
 
   <div class="summary-container">
     <h2 class="summary-title">Resumen del Envío</h2>
 
-    <!-- Remitente -->
+
     <div class="summary-section">
       <h3>Datos del Remitente</h3>
       <div class="info-grid">
@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <!-- Destinatario -->
+
     <div class="summary-section">
       <h3>Datos del Destinatario</h3>
       <div class="info-grid">
@@ -50,7 +50,7 @@
       </div>
     </div>
 
-    <!-- Ubicaciones -->
+
     <div class="summary-section">
       <h3>Ubicaciones</h3>
       <div class="info-grid">
@@ -65,7 +65,7 @@
       </div>
     </div>
 
-    <!-- Paquete -->
+
     <div class="summary-section">
       <h3>Detalles del Paquete</h3>
       <div class="info-grid">
@@ -74,7 +74,7 @@
           <span class="value">{{shippingData.package.isCustom ? 'Personalizado' : 'Predefinido'}}</span>
         </div>
 
-        <!-- Información del paquete predefinido -->
+
         <ng-container *ngIf="!shippingData.package.isCustom && shippingData.package.selectedPackage">
           <div class="info-item">
             <span class="label">Tamaño:</span>
@@ -90,7 +90,7 @@
           </div>
         </ng-container>
 
-        <!-- Información del paquete personalizado -->
+
         <ng-container *ngIf="shippingData.package.isCustom && shippingData.package.customDimensions">
           <div class="info-item">
             <span class="label">Dimensiones personalizadas:</span>
@@ -102,7 +102,7 @@
           </div>
         </ng-container>
 
-        <!-- Valor calculado -->
+
         <div class="info-item">
           <span class="label">Valor calculado:</span>
           <span class="value">{{shippingData.package.calculatedValue | currency:'CLP':'symbol-narrow':'1.0-0'}}</span>

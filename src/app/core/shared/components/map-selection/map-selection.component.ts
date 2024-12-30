@@ -1,4 +1,4 @@
-// map-selection.component.ts
+
 import { Component, OnInit, OnChanges, SimpleChanges, Output, EventEmitter, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -22,7 +22,7 @@ export interface LocationData {
   styleUrls: ['./map-selection.component.css']
 })
 export class MapSelectionComponent implements OnInit, OnChanges {
-  @Input() type: 'origin' | 'destination' = 'origin'; // Nuevo Input para el tipo
+  @Input() type: 'origin' | 'destination' = 'origin';
   @Output() locationSelected = new EventEmitter<LocationData>();
 
   private map!: Leaflet.Map;
@@ -40,7 +40,7 @@ export class MapSelectionComponent implements OnInit, OnChanges {
     { id: 6, title: 'Detalles de envío', active: false }
   ];
 
-  // Getter para el texto del placeholder según el tipo
+
   get placeholderText(): string {
     return this.type === 'origin'
       ? 'Buscar dirección de origen...'
