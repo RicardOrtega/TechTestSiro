@@ -1,6 +1,7 @@
 <main class="main">
-
-  <app-user-input></app-user-input>
+  <app-remitente *ngIf="showSender" (continueClicked)="onSenderComplete($event)"></app-remitente>
+  <app-user-input *ngIf="!showSender && !showPackage" [senderData]="senderData"></app-user-input>
+  <app-package *ngIf="!showSender && showPackage"></app-package>
 
 </main>
 

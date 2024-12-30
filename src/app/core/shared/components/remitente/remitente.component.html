@@ -9,10 +9,10 @@
   </div>
 
   <div class="form-container" *ngIf="currentStep === 1">
-    <h2>¿A quién quieres enviar?</h2>
-    <p class="subtitle">Ingresa los datos de la persona a quien quieres enviar.</p>
+    <h2>¿Quién envía?</h2>
+    <p class="subtitle">Ingresa tus datos como remitente del envío.</p>
 
-    <form [formGroup]="shippingForm" class="shipping-form">
+    <form [formGroup]="senderForm" class="shipping-form">
       <div class="form-row">
         <div class="form-group">
           <label for="rut">RUT <span class="required">*</span></label>
