@@ -1,27 +1,28 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FormGroup, FormBuilder, Validators, AbstractControl, ReactiveFormsModule} from '@angular/forms';
+import { Component, Output, EventEmitter } from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 import {NgForOf, NgIf} from '@angular/common';
 
 @Component({
-  selector: 'app-user-input',
-  templateUrl: './user-input.component.html',
-  standalone: true,
+  selector: 'app-remitente',
   imports: [
     ReactiveFormsModule,
-    NgIf,
-    NgForOf
+    NgForOf,
+    NgIf
   ],
-  styleUrls: ['./user-input.component.css']
+  templateUrl: './remitente.component.html',
+  standalone: true,
+  styleUrl: './remitente.component.css'
 })
-export class UserInputComponent {
-  @Input() senderData: any;
-  @Output() continueClicked = new EventEmitter<void>();
-  shippingForm: FormGroup;
+export class RemitenteComponent {
+  @Output() continueClicked = new EventEmitter<any>();
+  senderForm: FormGroup;
+  submitted = false;
   currentStep = 1;
 
   steps = [
-    { id: 1, title: '¿Quién envía?', active: false },
-    { id: 2, title: '¿A quién quieres enviar?', active: true },
+    { id: 1, title: '¿Quién envía?', active: true },
+    { id: 2, title: '¿A quién quieres enviar?', active: false },
     { id: 3, title: '¿Qué quieres enviar?', active: false },
     { id: 4, title: '¿Desde qué lugar envías?', active: false },
     { id: 5, title: '¿A dónde quieres enviar?', active: false },
@@ -29,7 +30,7 @@ export class UserInputComponent {
   ];
 
   constructor(private fb: FormBuilder) {
-    this.shippingForm = this.fb.group({
+    this.senderForm = this.fb.group({
       rut: ['', [Validators.required, this.rutValidator()]],
       nombre: ['', [Validators.required, Validators.minLength(2), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*')]],
       apellido: ['', [Validators.required, Validators.minLength(2), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*')]],
@@ -39,7 +40,7 @@ export class UserInputComponent {
   }
 
   rutValidator() {
-    return (control: AbstractControl): { [key: string]: any } | null => {
+    return (control: AbstractControl): {[key: string]: any} | null => {
       const rut = control.value;
       if (!rut) return null;
 
@@ -72,7 +73,7 @@ export class UserInputComponent {
   }
 
   get f() {
-    return this.shippingForm.controls;
+    return this.senderForm.controls;
   }
 
   getErrorMessage(fieldName: string): string {
@@ -111,11 +112,13 @@ export class UserInputComponent {
 
   isFieldInvalid(fieldName: string): boolean {
     const field = this.f[fieldName];
-    return field.invalid && (field.dirty || field.touched);
+    return field.invalid && (field.dirty || field.touched || this.submitted);
   }
 
   continuar() {
-    if (this.shippingForm.invalid) {
+    this.submitted = true;
+
+    if (this.senderForm.invalid) {
       Object.keys(this.f).forEach(key => {
         const control = this.f[key];
         control.markAsTouched();
@@ -123,12 +126,6 @@ export class UserInputComponent {
       return;
     }
 
-    if (this.currentStep < this.steps.length) {
-      this.steps[this.currentStep - 1].active = false;
-      this.currentStep++;
-      this.steps[this.currentStep - 1].active = true;
-    } else {
-      this.continueClicked.emit();
-    }
+    this.continueClicked.emit(this.senderForm.value);
   }
 }

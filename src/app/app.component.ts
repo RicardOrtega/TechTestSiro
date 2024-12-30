@@ -1,16 +1,35 @@
 import {Component} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
-import {VolumeCalculatorComponent} from './core/shared/components/volume-calculator/volume-calculator.component';
 import {UserInputComponent} from './core/shared/components/user-input/user-input.component';
-import {HeaderComponent} from './core/shared/components/header/header.component';
+import {RemitenteComponent} from './core/shared/components/remitente/remitente.component';
+import {NgIf} from '@angular/common';
+import {PackageSelectionComponent} from './core/shared/components/package/package.component';
+import {LocationData, MapSelectionComponent} from './core/shared/components/map-selection/map-selection.component';
+
+
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, VolumeCalculatorComponent, UserInputComponent, HeaderComponent],
+  imports: [RouterOutlet, RemitenteComponent, UserInputComponent, NgIf, PackageSelectionComponent,MapSelectionComponent],
   templateUrl: './app.component.html',
   standalone: true,
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Prueba';
+  showSender = true;
+  showPackage = false; // Add this line
+  senderData: any;
+
+  onSenderComplete(data: any) {
+    this.senderData = data;
+    this.showSender = false;
+    this.showPackage = true; // Add this line
+  }
+
+  onLocationSelected(location: LocationData) {
+    console.log('Selected location:', location);
+    // Handle the selected location
+  }
+
 }

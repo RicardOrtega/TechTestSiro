@@ -1,0 +1,29 @@
+<div class="map-container">
+  <div class="search-container">
+    <input
+      type="text"
+      [formControl]="searchControl"
+      placeholder="Buscar dirección..."
+      (keyup.enter)="searchAddress()">
+    <button
+      (click)="searchAddress()"
+      [disabled]="isLoading">
+      Buscar
+    </button>
+  </div>
+
+  <div id="map"></div>
+
+  <div *ngIf="isLoading" class="loading-indicator">
+    Buscando dirección...
+  </div>
+
+  <div *ngIf="selectedLocation" class="location-info">
+    <p>{{ selectedLocation.displayAddress }}</p>
+    <button
+      (click)="onConfirmLocation()"
+      class="confirm-button">
+      Confirmar ubicación
+    </button>
+  </div>
+</div>

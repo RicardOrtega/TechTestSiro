@@ -1,0 +1,79 @@
+<div class="shipping-container">
+
+    <div class="steps-container">
+      <div class="step-list">
+        <div *ngFor="let step of steps" class="step-item" [class.active]="step.active">
+          <div class="step-circle"></div>
+          <span class="step-text">{{ step.title }}</span>
+        </div>
+      </div>
+    </div>
+
+
+  <div class="form-container">
+    <form [formGroup]="packageForm">
+      <div class="sizes-grid">
+        <ng-container *ngFor="let pkg of packageSizes">
+          <div class="size-option"
+               [class.selected]="selectedPackage?.id === pkg.id"
+               (click)="onPackageSelect(pkg)">
+            <div class="size-content">
+              <div class="size-name">{{ pkg.name }}</div>
+              <div class="size-dimensions">{{ pkg.dimensions }}</div>
+              <div class="size-weight">{{ pkg.maxWeight }}</div>
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="size-option custom-size-option"
+             [class.selected]="isCustomSizeSelected"
+             (click)="onCustomSizeSelect()">
+          <div class="size-content">
+            <div class="size-name">Personalizado</div>
+            <div class="size-dimensions">Ingresa las dimensiones</div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="isCustomSizeSelected" class="custom-inputs-container">
+        <div class="input-group">
+          <label for="length">Largo (cm):</label>
+          <input id="length"
+                 type="number"
+                 formControlName="length"
+                 class="form-input no-arrows">
+        </div>
+
+        <div class="input-group">
+          <label for="width">Ancho (cm):</label>
+          <input id="width"
+                 type="number"
+                 formControlName="width"
+                 class="form-input no-arrows">
+        </div>
+
+        <div class="input-group">
+          <label for="height">Alto (cm):</label>
+          <input id="height"
+                 type="number"
+                 formControlName="height"
+                 class="form-input no-arrows">
+        </div>
+      </div>
+
+      <div class="value-section">
+        <div class="calculated-value">
+          Costo: {{ calculatedValue | currency:'CLP':'symbol-narrow':'1.0-0' }}
+        </div>
+      </div>
+
+      <div class="button-container">
+        <button class="continue-button"
+                [disabled]="!isFormValid()"
+                (click)="onContinue()">
+          Continuar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
