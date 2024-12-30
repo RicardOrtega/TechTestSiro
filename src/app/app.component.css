@@ -12,8 +12,8 @@ html, body {
   height: 100vh;
   width: 100vw;
   background: linear-gradient(135deg, #B83280 10%, #6C2141 100%);
-  background-size: cover; /* Ensure the background covers the entire area */
-  padding: 0 10px; /* Reduce horizontal padding */
+  background-size: cover;
+  padding: 0 10px;
   gap: 1rem;
 }
 
@@ -32,13 +32,13 @@ input[type=number] {
 @media (max-width: 600px) {
   .main {
     flex-direction: column;
-    height: auto; /* Adjust height for better fit */
-    padding: 20px; /* Add padding for better spacing */
+    height: auto;
+    padding: 20px;
   }
 
   .container {
-    width: 100%; /* Ensure containers take full width */
-    margin-bottom: 20px; /* Add margin between containers */
+    width: 100%;
+    margin-bottom: 20px;
   }
 
   label {

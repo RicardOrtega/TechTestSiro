@@ -10,7 +10,7 @@ import {AlertModalComponent} from './core/shared/components/alert-modal/alert-mo
 
 export enum ShippingStep {
   Sender,
-  UserInput,    // Movido antes de OriginMap
+  UserInput,
   OriginMap,
   DestinationMap,
   Package,
@@ -46,7 +46,7 @@ export class AppComponent {
 
   onSenderComplete(data: any) {
 
-    // Inicializar shippingData si no existe
+
     if (!this.shippingData) {
       this.shippingData = {
         sender: data,
@@ -114,7 +114,7 @@ export class AppComponent {
   onDestinationSelected(location: LocationData) {
     if (this.shippingData) {
       this.shippingData.destination = location;
-      // Asegurarse de que todos los datos necesarios estén presentes
+
       this.shippingData = {
         ...this.shippingData,
         origin: this.originLocation || this.shippingData.origin,
