@@ -1,9 +1,41 @@
 <main class="main">
-  <app-remitente *ngIf="showSender" (continueClicked)="onSenderComplete($event)"></app-remitente>
-  <app-user-input *ngIf="!showSender && !showPackage" [senderData]="senderData"></app-user-input>
-  <app-package *ngIf="!showSender && showPackage"></app-package>
-  <app-map-selection (locationSelected)="onLocationSelected($event)"></app-map-selection>
+  <app-remitente
+    *ngIf="currentStep === ShippingStep.Sender"
+    (continueClicked)="onSenderComplete($event)">
+  </app-remitente>
+
+  <app-user-input
+    *ngIf="currentStep === ShippingStep.UserInput"
+    [senderData]="senderData"
+    (continueClicked)="onUserInputComplete($event)">
+  </app-user-input>
+
+  <app-package
+    *ngIf="currentStep === ShippingStep.Package"
+    [shippingData]="shippingData"
+    (continueClicked)="onPackageComplete($event)"
+   >
+  </app-package>
+
+  <app-map-selection
+    *ngIf="currentStep === ShippingStep.OriginMap"
+    type="origin"
+    (locationSelected)="onOriginSelected($event)">
+  </app-map-selection>
+
+  <app-map-selection
+    *ngIf="currentStep === ShippingStep.DestinationMap"
+    type="destination"
+    (locationSelected)="onDestinationSelected($event)">
+  </app-map-selection>
+
+  <app-shipping-details
+    *ngIf="currentStep === ShippingStep.Details"
+    [shippingData]="shippingData"
+    (orderConfirmed)="onOrderConfirmed()">
+  </app-shipping-details>
+
 
 </main>
 
-<router-outlet/>
+

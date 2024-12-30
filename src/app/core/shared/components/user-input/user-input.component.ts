@@ -15,7 +15,7 @@ import {NgForOf, NgIf} from '@angular/common';
 })
 export class UserInputComponent {
   @Input() senderData: any;
-  @Output() continueClicked = new EventEmitter<void>();
+  @Output() continueClicked = new EventEmitter<any>();
   shippingForm: FormGroup;
   currentStep = 1;
 
@@ -114,21 +114,18 @@ export class UserInputComponent {
     return field.invalid && (field.dirty || field.touched);
   }
 
-  continuar() {
-    if (this.shippingForm.invalid) {
-      Object.keys(this.f).forEach(key => {
-        const control = this.f[key];
-        control.markAsTouched();
-      });
-      return;
-    }
-
-    if (this.currentStep < this.steps.length) {
-      this.steps[this.currentStep - 1].active = false;
-      this.currentStep++;
-      this.steps[this.currentStep - 1].active = true;
+  onContinue() {
+    if (this.shippingForm.valid) {
+      console.log('Form submitted:', this.shippingForm.value);
+      this.continueClicked.emit(this.shippingForm.value);
     } else {
-      this.continueClicked.emit();
+      console.log('Form is invalid');
+      Object.keys(this.shippingForm.controls).forEach(key => {
+        const control = this.shippingForm.get(key);
+        if (control?.invalid) {
+          control.markAsTouched();
+        }
+      });
     }
   }
 }

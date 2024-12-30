@@ -1,0 +1,44 @@
+<div class="shipping-details-container">
+  <h2>Detalles del Envío</h2>
+
+  <div class="detail">
+    <h3>Remitente</h3>
+    <p>{{ shippingData.sender.nombre }} {{ shippingData.sender.apellido }}</p>
+    <p>{{ shippingData.sender.email }}</p>
+    <p>{{ shippingData.sender.telefono }}</p>
+  </div>
+
+  <div class="detail">
+    <h3>Destinatario</h3>
+    <p>{{ shippingData.recipient.nombre }} {{ shippingData.recipient.apellido }}</p>
+    <p>{{ shippingData.recipient.email }}</p>
+    <p>{{ shippingData.recipient.telefono }}</p>
+  </div>
+
+  <div class="detail">
+    <h3>Origen</h3>
+    <p>{{ shippingData.origin.displayAddress }}</p>
+  </div>
+
+  <div class="detail">
+    <h3>Destino</h3>
+    <p>{{ shippingData.destination.displayAddress }}</p>
+  </div>
+
+  <div class="detail">
+    <h3>Paquete</h3>
+    <p>Tamaño: {{ shippingData.package.selectedPackage?.name || 'Personalizado' }}</p>
+    <p>Dimensiones:
+      <span *ngIf="shippingData.package.selectedPackage">
+        {{ shippingData.package.selectedPackage.dimensions }}
+      </span>
+      <span *ngIf="shippingData.package.customDimensions">
+        {{ shippingData.package.customDimensions.length }} x {{ shippingData.package.customDimensions.width }} x {{ shippingData.package.customDimensions.height }}
+      </span>
+    </p>
+    <p>Peso Máximo: {{ shippingData.package.selectedPackage?.maxWeight || 'N/A' }}</p>
+    <p>Valor Calculado: {{ shippingData.package.calculatedValue }} CLP</p>
+  </div>
+
+  <button (click)="confirmOrder()" class="confirm-button">Confirmar Orden</button>
+</div>

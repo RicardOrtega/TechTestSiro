@@ -1,29 +1,25 @@
+<!-- map-selection.component.html -->
 <div class="map-container">
-  <div class="search-container">
-    <input
-      type="text"
-      [formControl]="searchControl"
-      placeholder="Buscar dirección..."
-      (keyup.enter)="searchAddress()">
-    <button
-      (click)="searchAddress()"
-      [disabled]="isLoading">
-      Buscar
-    </button>
+
+  <div class="steps-container">
+    <div class="step-list">
+      <div *ngFor="let step of steps" class="step-item" [class.active]="step.active">
+        <div class="step-circle"></div>
+        <span class="step-text">{{ step.title }}</span>
+      </div>
+    </div>
   </div>
 
-  <div id="map"></div>
-
-  <div *ngIf="isLoading" class="loading-indicator">
-    Buscando dirección...
-  </div>
-
-  <div *ngIf="selectedLocation" class="location-info">
-    <p>{{ selectedLocation.displayAddress }}</p>
-    <button
-      (click)="onConfirmLocation()"
-      class="confirm-button">
-      Confirmar ubicación
-    </button>
+  <div class="map-content">
+    <div class="search-container">
+      <input type="text" [formControl]="searchControl" placeholder="Buscar dirección">
+      <button (click)="searchAddress()" [disabled]="isLoading">Buscar</button>
+    </div>
+    <div id="map"></div>
+    <div class="loading-indicator" *ngIf="isLoading">Cargando...</div>
+    <div class="location-info" *ngIf="selectedLocation">
+      <p class="address">{{ selectedLocation.displayAddress }}</p>
+      <button class="confirm-button" (click)="onConfirmLocation()">Confirmar ubicación</button>
+    </div>
   </div>
 </div>

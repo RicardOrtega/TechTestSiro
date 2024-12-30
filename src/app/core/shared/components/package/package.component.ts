@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {ShippingFormData} from '../../interface/data';
 
 interface PackageSize {
   id: string;
@@ -18,6 +19,10 @@ interface PackageSize {
   imports: [CommonModule, ReactiveFormsModule]
 })
 export class PackageSelectionComponent {
+  @Input() shippingData: any;
+  @Output() continueClicked = new EventEmitter<any>();
+
+
   packageForm: FormGroup;
   selectedPackage: PackageSize | null = null;
   calculatedValue: number = 0;
@@ -26,12 +31,12 @@ export class PackageSelectionComponent {
   currentStep = 3;
 
   steps = [
-    { id: 1, title: '¿Quién envía?', active: false },
-    { id: 2, title: '¿A quién quieres enviar?', active: false },
-    { id: 3, title: '¿Qué quieres enviar?', active: true },
-    { id: 4, title: '¿Desde qué lugar envías?', active: false },
-    { id: 5, title: '¿A dónde quieres enviar?', active: false },
-    { id: 6, title: 'Detalles de envío', active: false }
+    {id: 1, title: '¿Quién envía?', active: false},
+    {id: 2, title: '¿A quién quieres enviar?', active: false},
+    {id: 3, title: '¿Qué quieres enviar?', active: true},
+    {id: 4, title: '¿Desde qué lugar envías?', active: false},
+    {id: 5, title: '¿A dónde quieres enviar?', active: false},
+    {id: 6, title: 'Detalles de envío', active: false}
   ];
 
 
@@ -156,7 +161,7 @@ export class PackageSelectionComponent {
 
   onContinue() {
     if (this.isFormValid()) {
-      console.log('Continuing with:', {
+      const packageData = {
         isCustom: this.isCustomSizeSelected,
         selectedPackage: this.selectedPackage,
         customDimensions: this.isCustomSizeSelected ? {
@@ -165,8 +170,10 @@ export class PackageSelectionComponent {
           height: this.packageForm.get('height')?.value
         } : null,
         calculatedValue: this.calculatedValue
-      });
+      };
+
+      console.log('Continuing with:', packageData);
+      this.continueClicked.emit(packageData); // Emitir el evento con los datos
     }
   }
-
 }

@@ -1,36 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
 .map-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  padding: 2rem;
+  gap: 2rem;
+  animation: fadeIn 1s ease-in-out;
 }
 
-#map {
-  height: 500px;
-  width: 100%;
-  margin-top: 10px;
+
+.steps-container {
+  flex: 0 0 300px;
+  padding: 2rem;
+}
+
+.step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+}
+
+.step-item.active {
+  color: white;
+  font-weight: 600;
+}
+
+.step-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  transition: all 0.3s ease;
+}
+
+.step-item.active .step-circle {
+  background-color: white;
+  border-color: white;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+
+.map-content {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-in-out;
+  width: 100%; /* Ensure the map content takes full width */
 }
 
 .search-container {
-  position: relative;
-  z-index: 1000;
-  margin-bottom: 10px;
   display: flex;
   gap: 10px;
+  margin-bottom: 20px;
 }
 
 .search-container input {
   flex: 1;
-  padding: 8px;
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 4px 0 0 4px;
 }
 
 .search-container button {
-  padding: 8px 16px;
+  padding: 10px;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 0 4px 4px 0;
   cursor: pointer;
 }
 
@@ -39,42 +86,55 @@
   cursor: not-allowed;
 }
 
+#map {
+  height: 500px;
+  width: 100%;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
 .loading-indicator {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 4px;
-  z-index: 1000;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
 }
 
 .location-info {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: white;
-  padding: 15px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  z-index: 1000;
-  width: 80%;
-  max-width: 500px;
   text-align: center;
+  margin-top: 20px;
+}
+
+.location-info p {
+  margin: 5px 0;
+}
+
+.location-info .address {
+  font-weight: bold;
+  color: #333;
 }
 
 .confirm-button {
-  padding: 8px 16px;
-  background-color: #007bff;
+  padding: 10px 20px;
+  background-color: #28a745;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .confirm-button:hover {
-  background-color: #0056b3;
+  background-color: #218838;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
